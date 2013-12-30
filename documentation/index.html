@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Documentation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1><center>Documentation NightBase</center></h1>
+        </header>
+
+        <div id="content">
+            <div id="menu">
+                <center><h1><a href="telechargement.html">Telechargement</a></h1></center>  
+                <center>
+
+                    <ul>
+                        <li><a href="#">Configuration</a></li>
+                        <li><a href="#">HandlerClass</a></li>
+                        <li><a href="#">ValeurConfig</a></li>
+                        <li><a href="#">Sql</a></li>
+                        <li><a href="#">librairie</a></li>
+
+                    </ul>
+                </center>
+
+            </div>
+            <h1>C'est quoi NightBase ?</h1>
+            <p>NightBase est un micro-framework php, ce micro-framework est essentiellement pour les débutants et
+                intermédiaire en langage php .<br/> le but de Nightbase est d'abord faciliter l'environnement de travaille
+                et d'offire une base pour pouvoir coder et sans aucune connaicense en POO(Programation orienter objet).</p>
+
+            <h1>Configuration : </h1>
+            <p>Pour configurer NightBase vous devez ouvrir la page 'require.php' qui ce situe dans le fichier configuration.</p>
+            <div class="codesource">
+                <h2>Code : </h2>
+                <p> 
+                    <\?php
+                    <br/>
+                    $this->ConfigHandler->loadFileConfig(array(<br/>
+                    'config.php'<br/>
+                    ));<br/>
+                    $this->ConfigHandler->DefaultPage(array(<br/>
+                    'Acceuil' => 'index',<br/>
+                    'Erreur' => 'erreur'<br/>
+                    ));<br/>
+                    $this->ConfigHandler->Connexion(array(<br/>
+                    'host' => 'localhost',<br/>
+                    'username' => 'root',<br/>
+                    'password' => '',<br/>
+                    'database' => 'noukta'<br/>
+                    ));
+                    <br/>
+                    ?>
+
+                </p>
+            </div>
+            <div class="codesource">
+                <h2>Explication : </h2>
+                <p> 
+                    loadFileConfig : les fichiers de configuration que vous voulez inclure(par exemple j'ai inclus le fichier 'config.php').<br/>
+                    DefaultPage : les fichiers qui sont appeler par default , Acceuil : la premiére page appeler , erreur : si il y'as un probléme en apelle la page erreur.<br/>
+                    Connexion : la configuration pour accés a la base de donnés.<br/>
+
+                </p>
+            </div>
+            <h1> Comprendre HandlerClass & les classes dériver  </h1>
+            <div class="codesource">
+                <h2>Explication : </h2>
+                <p> 
+                    la class HandlerClass permet d'acceder a tous les autres classes : <br/>
+                    -Database.php : permet de definir les valeurs des variables de connexion a la base de données.<br/>
+                    -Loader.php : permet de charger des librairies ou des Models(dans la prochaine version ).<br/>
+                    -ParselClass : permet de definir les valeurs par default de l'url .<br/>
+                    -ConfigHandler : permet de d'enregistrer les valeurs saisi par require.php.<br/>
+
+                </p>
+            </div>
+            <h1> la variable HandlerClass  </h1>
+            <div class="codesource">
+                <h2>Explication : </h2>
+                <p> 
+                    la variable HandlerClass($HandlerClass) permet d'acceder au fonctionnaliter de NightBase par exemple:<br/>
+                    acceder au page de configuration , charger de nouvelle librairie & de model , definir l'url en entier ...
+
+                </p>
+            </div>
+            <h1> la page Layout  </h1>
+            <div class="codesource">
+                <h2>Explication : </h2>
+                <p> 
+                    La page Layout.php(dans le dossier template) permet d'éviter l'inclusion du template (header,footer..) dans chaque fichier ,
+                    vous incluer votre template par default et mettre la variable '$content' dans la partie dynamique (la partie ou doit s'inclure la page specifier(si l'url est index.php donc la page index.php s'inclus)).                </p>
+            </div>
+            <div class="codesource">
+                <h2>Code : </h2>
+                <p> 
+                    <\html><br/>
+                    <\head><br/>
+                    <\meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><br/>
+                    <\title><\?php echo $HandlerClass->ConfigHandler->get('Config')->titre;?><\title><br/>
+                    <\head><br/>
+                    <\body><br/>
+                    <\div class='news'><br/>
+                    <\?php echo $content; ?><br/>
+                    <\div><br/>
+                    <\body><br/>
+                    <\html><br/>
+
+                </p>
+            </div>
+            <div class="remarque">
+                <h2>Remarque  : </h2>
+                <p> 
+                    N'oublier pas le <\?php echo $content; ?> ou votre page specifier ne vas pas étre afficher
+                </p>
+            </div>
+            <h1> Acceder a une page de configuration  </h1>
+            <div class="codesource">
+                <h2>Code : </h2>
+                <p> 
+                    <\?php echo $HandlerClass->ConfigHandler->get('Config')->titre;?>
+                </p>
+            </div>
+            <div class="codesource">
+                <h2>Code Config.php : </h2>
+                <p> 
+                    return array(<br/>
+                    'titre'=>'yamisaaf',<br/>  
+                    );<br/>
+
+                </p>
+            </div>
+            <div class="codesource">
+                <h2>Explication : </h2>
+                <p> 
+                    -$HandlerClass : la variable d'acces au class .<br/>
+                    -ConfigHandler : la class quand veux accéder.<br/>
+                    -get('Config') : la page quand veux acceder <br/>
+                    -titre : la valeur quand veux acceder.<br/>
+                </p>
+            </div>
+            <div class="remarque">
+                <h2>Remarque  : </h2>
+                <p> 
+                    vous pouvez crée une nouvelle page de configuration dans le dossier configuration
+                </p>
+            </div>
+            <div class="remarque">
+                <h2>Remarque 2 : </h2>
+                <p> 
+                    pour ajouter une autre valeur suffis d'allez a config.php et d'ajouter 'nouvellevaluer'=>'c'estunenouvellevaluer', .
+                </p>
+            </div>
+            <div class="remarque">
+                <h2>Remarque 3 : </h2>
+                <p> 
+                    Pour inclure une nouvelle page de configuration vous devez l'ajouter dans loadFileConfig<br/>
+
+                </p>
+            </div>
+            <div class="sucess">
+                <h2>Exemple Remarque 3  : </h2>
+                <p> 
+                    $this->ConfigHandler->loadFileConfig(array(<br/>
+                    'config.php','nouvellepage.php',<br/>
+                    ));<br/>
+                </p>
+            </div>
+
+            <h1>Faire une requéte Sql </h1>
+            <div class="codesource">
+                <h2>Code : </h2>
+                <p> 
+                    $bdd->query('SELECT * FROM noukate')->fetch();
+                </p>
+            </div>
+            <h1>Charger une Librairie </h1>
+            <div class="codesource">
+                <h2>Code : </h2>
+                <p> 
+                    $HandlerClass->Loader->libs('nomdelibsquandveuxcharger');
+                </p>
+            </div>
+            <div class="codesource">
+                <h2>Explication : </h2>
+                <p> 
+                    -$HandlerClass : la variable d'acces au class .<br/>
+                    -Loader : la class quand veux accéder.<br/>
+                    -libs : function pour charger la librairie
+                </p>
+            </div>
+            <div class="remarque">
+                <h2>Remarque : </h2>
+                <p> 
+                    Vous devez mettre la librairie dans le dossier librairie
+                </p>
+            </div>
+
+        </div>
+        <footer><center>NightBase par yamisaaf</center></footer>
+    </body>
+</html>
